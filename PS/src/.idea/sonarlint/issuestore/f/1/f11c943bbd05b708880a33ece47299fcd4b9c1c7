@@ -1,0 +1,13 @@
+
+R
+java:S1854"7Remove this useless assignment to local variable "arr".(¥õÕ›ûÿÿÿÿ
+C
+java:S1481
+"(Remove this unused "max" local variable.(“»ïüøÿÿÿÿ
+C
+java:S1481"(Remove this unused "arr" local variable.(¥õÕ›ûÿÿÿÿ
+C	java:S108")Either remove or fill this block of code.(äŒ‡Àùÿÿÿÿ
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¶”›ú
+‹
+java:S1598"uThis file "b1157.java" should be located in "Lv1/Lv1" directory, not in "/Users/donggilee/Desktop/PS/PS/src/boj/Lv1".(ßÅ°Ì
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ßÅ°Ì
