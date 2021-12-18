@@ -14,6 +14,7 @@ public class ThelawOfNumbers {
         for (int i = 0; i < n; i++) {
             res[i] = sc.nextInt();
         }
+
         Arrays.sort(res);
         int first = res[n - 1];
         int second = res[n - 2];
@@ -23,9 +24,6 @@ public class ThelawOfNumbers {
 
         int result = count * first;
         result += (m - count) * second;
-
         System.out.println(result);
-
-
     }
 }
