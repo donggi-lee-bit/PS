@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class NumberCardGame {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int result = 0;
         int n = sc.nextInt();
         int m = sc.nextInt();
+        int result = 0;
 
         for (int i = 0; i < n; i++) {
             int minValue = 10001;
@@ -15,7 +15,7 @@ public class NumberCardGame {
                 int card = sc.nextInt();
                 minValue = Math.min(minValue, card);
             }
-            result = Math.max(result, minValue);
+            result = Math.max(minValue, result);
         }
         System.out.println(result);
     }
