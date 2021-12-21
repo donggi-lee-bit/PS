@@ -1,4 +1,4 @@
-package dongbinAlgo;
+package dongbinAlgo.greedy;
 
 import java.util.Scanner;
 
