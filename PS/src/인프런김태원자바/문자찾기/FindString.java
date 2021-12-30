@@ -11,12 +11,12 @@ public class FindString {
          */
 
         Scanner sc = new Scanner(System.in);
-        String[] str = sc.nextLine().toUpperCase().split("");
-        String findWord = sc.next().toUpperCase();
+        String str = sc.next().toUpperCase();
+        char findWord = sc.next().toUpperCase().charAt(0);
         int result = 0;
 
-        for (int i = 0; i < str.length; i++) {
-            if (str[i].equals(findWord)) {
+        for (char x : str.toCharArray()) {
+            if (x == findWord) {
                 result++;
             }
         }
