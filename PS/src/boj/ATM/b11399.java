@@ -15,13 +15,29 @@ public class b11399 {
 
         Arrays.sort(arr);
 
-        int result = 0;
-        for (int i = 0; i < arr.length; i++) {
-            int temp = 0;
-            for (int j = 0; j < i + 1; j++) {
-                temp += arr[j];
-            }
-            result += temp;
+//        int[] arr2= new int[N];
+//
+//        for (int i = 0; i < arr.length; i++) {
+//            int temp = 0;
+//            for (int j = 0; j < i + 1; j++) {
+//                temp += arr[j];
+//            }
+//
+//            arr2[i]=temp;
+//
+//        }
+//
+//        int result=0;
+//        for(int i=0;i<arr2.length;i++){
+//            result+=arr2[i];
+//        }
+//
+//        System.out.println(result);
+
+        int result=0;
+        for(int i=0;i<arr.length;i++){
+            result+=arr[i]*(arr.length-i);
+
         }
         System.out.println(result);
     }

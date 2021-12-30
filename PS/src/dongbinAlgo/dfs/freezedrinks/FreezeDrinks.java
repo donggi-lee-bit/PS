@@ -1,4 +1,4 @@
-package dongbinAlgo.dfs;
+package dongbinAlgo.dfs.freezedrinks;
 
 import java.util.Scanner;
 import java.util.jar.JarEntry;
