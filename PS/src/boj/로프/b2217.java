@@ -20,7 +20,7 @@ public class b2217 {
         for (int i = 1; i < arr.length; i++) {
             max = Math.max(max, arr[i] * (N - (i - 1)));
         }
-
+    // 10 15
         System.out.println(max);
     }
 }
