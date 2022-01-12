@@ -83,12 +83,3 @@ public class DeleteDuplicates {
 //    head.next = deleteDuplicates(head.next);
 //    return head;
 //}{
-
-
-
-1. head가 null인 경우 null 반환하도록 하고
-
-        2. 한번 prev, current 나눠서 해보세여
-
-        리고 current가 null인지 여부를 생각
-        값이 같은 경우 값이 다른 경우
