@@ -10,14 +10,12 @@ public class Recursive {
         }
 
         int mid = (start + end) / 2;
-
         if (arr[mid] == target) {
             return mid;
         } else if (arr[mid] > target) {
-            return binarySearch(arr, target, start, mid - 1);
-        } else {
+            return binarySearch(arr, target, 0, mid - 1);
+        } else
             return binarySearch(arr, target, mid + 1, end);
-        }
     }
 
     public static void main(String[] args) {
@@ -33,9 +31,10 @@ public class Recursive {
 
         int result = binarySearch(arr, target, 0, n - 1);
         if (result == -1) {
-            System.out.println("찾는 원소가 배열에 존재하지 않습니다.");
+            System.out.println("찾는 데이터가 없습니다.");
         } else {
             System.out.println(result + 1);
         }
+
     }
 }
