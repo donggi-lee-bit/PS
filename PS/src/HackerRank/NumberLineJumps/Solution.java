@@ -1,6 +1,6 @@
-package HackerRank;
+package HackerRank.NumberLineJumps;
 
-public class KangGaRoo {
+public class Solution {
 
   public static void main(String[] args) {
 
