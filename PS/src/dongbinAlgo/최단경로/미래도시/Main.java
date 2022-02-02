@@ -31,6 +31,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        // 5, 7
         n = sc.nextInt();   // 노드의 개수
         m = sc.nextInt();   // 간선의 개수
 
@@ -50,6 +51,7 @@ public class Main {
             }
         }
 
+        // 1 2 등등등  마지막 줄 두 번째까지 입력하고
         for (int i = 0; i < m; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
@@ -57,6 +59,7 @@ public class Main {
             graph[b][a] = 1;
         }
 
+        // 4 5
         x = sc.nextInt();
         k = sc.nextInt();
 
