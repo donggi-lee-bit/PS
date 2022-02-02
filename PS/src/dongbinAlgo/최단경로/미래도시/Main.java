@@ -31,8 +31,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        n = sc.nextInt();
-        m = sc.nextInt();
+        n = sc.nextInt();   // 노드의 개수
+        m = sc.nextInt();   // 간선의 개수
 
         // graph를 무제한 수로 전부 초기화
         for (int i = 0; i < 101; i++) {
