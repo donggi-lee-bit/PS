@@ -5,6 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
+    /*
+7 8
+0 1 3
+1 1 7
+0 7 6
+1 7 1
+0 3 7
+0 4 2
+0 1 1
+1 1 1
+     */
 
     public static int n, m;
     public static int[] parent = new int[100001];
@@ -19,6 +30,7 @@ public class Main {
     public static void unionParent(int a, int b) {
         a = findParent(a);
         b = findParent(b);
+
         if (a < b) {
             parent[b] = a;
         } else {
@@ -33,6 +45,7 @@ public class Main {
         n = Integer.parseInt(strings[0]);
         m = Integer.parseInt(strings[1]);
 
+        // 노드의 부모를 노드 자신으로 초기화
         for (int i = 1; i <= n; i++) {
             parent[i] = i;
         }
@@ -46,8 +59,8 @@ public class Main {
             if (oper == 0) {
                 unionParent(a, b);
             } else if (oper == 1) {
-                if (findParent(a) == findParent(b)) {
-                    System.out.println("Yes");
+                if (parent[a] == parent[b]) {
+                    System.out.println("YES");
                 } else {
                     System.out.println("NO");
                 }
