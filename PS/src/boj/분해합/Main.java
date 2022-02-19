@@ -14,15 +14,16 @@ public class Main {
         int result = 0;
 
         for (int i = 1; i < n; i++) {
-            String[] strings = Integer.toString(i).split("");
-            int copyIndex = i;
 
-            int res = 0;
-            for (String string : strings) {
-                res += Integer.parseInt(string);
+            int sum = 0;
+            int copy = i;
+            while (copy != 0) {
+                sum += copy % 10;
+                copy /= 10;
             }
-            if (n == copyIndex + res) {
-                result = copyIndex;
+
+            if (n == sum + i) {
+                result = i;
                 break;
             }
         }
