@@ -13,10 +13,10 @@ public class Main {
         User[] users = new User[n];
 
         for (int i = 0; i < n; i++) {
+
             String[] strings = br.readLine().split(" ");
             int age = Integer.parseInt(strings[0]);
             String name = strings[1];
-
             users[i] = new User(age, name);
         }
 
@@ -29,7 +29,7 @@ public class Main {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            sb.append(users[i] + "\n");
+            sb.append(users[i]);
         }
         System.out.println(sb);
     }
@@ -45,7 +45,7 @@ public class Main {
 
         @Override
         public String toString() {
-            return age + " " + name;
+            return age + " " + name + "\n";
         }
     }
 }
