@@ -11,21 +11,22 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < n; i++) {
+            String s = br.readLine();
 
-            String strings = br.readLine();
-            int count = 0;
+            int check = 0;
+            for (char x : s.toCharArray()) {
 
-            for (int j = 0; j < strings.length(); j++) {
-                char c = strings.charAt(j);
+                if (check >= 0) {
 
-                if (count >= 0) {
-                    if (c == '(') {
-                        count++;
-                    } else if (c == ')') count -= 1;
+                    if (x == '(') {
+                        check++;
+                    } else if (x == ')') {
+                        check -= 1;
+                    }
                 } else break;
             }
 
-            if (count == 0) {
+            if (check == 0) {
                 sb.append("YES" + "\n");
             } else {
                 sb.append("NO" + "\n");
