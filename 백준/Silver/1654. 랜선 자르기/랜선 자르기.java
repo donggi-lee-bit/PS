@@ -8,14 +8,17 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		String[] strings = br.readLine().split(" ");
-		int k = Integer.parseInt(strings[0]);    // 랜선 개수 K
-		int n = Integer.parseInt(strings[1]);	 // 필요한 랜선 개수 N
+		int k = Integer.parseInt(strings[0]);
+		int n = Integer.parseInt(strings[1]);
 
 		int[] lines = new int[k];
 		long max = 0;
 		for (int i = 0; i < k; i++) {
 			lines[i] = Integer.parseInt(br.readLine());
-			max = Math.max(max, lines[i]);
+
+			if (max < lines[i]) {
+				max = lines[i];
+			}
 		}
 
 		max++;
@@ -24,24 +27,23 @@ public class Main {
 		long mid = 0;
 
 		while (min < max) {
-
 			mid = (min + max) / 2;
 
-			long count = 0;
+			long sum = 0;
 
 			for (int i = 0; i < lines.length; i++) {
-				count += lines[i] / mid;
+				sum += lines[i] / mid;
 			}
 
-			if (count < n) {
+			if (sum < n) {
 				max = mid;
 			} else {
 				min = mid + 1;
 			}
 		}
 
-		System.out.println(min - 1);
-		
+		System.out.println(min - 1);	// upperbound - 1
+
 	}
 
 }
