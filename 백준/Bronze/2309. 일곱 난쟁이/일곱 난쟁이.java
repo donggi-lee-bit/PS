@@ -18,25 +18,27 @@ public class Main {
 
         Arrays.sort(arr);
         StringBuilder sb = new StringBuilder();
+        int num1 = 0;
+        int num2 = 0;
 
-        for (int i = 0; i < 9; i++) {
-            for (int j = i + 1; j < 9; j++) {
+        for (int i = 0; i < N; i++) {
+            for (int j = i + 1; j < N; j++) {
 
                 if (sum - arr[i] - arr[j] == 100) {
-
-                    for (int k = 0; k < 9; k++) {
-                        if (arr[k] == arr[i] || arr[k] == arr[j]) {
-                            continue;
-                        } else {
-                            sb.append(arr[k]).append("\n");
-                        }
-                    }
-                    System.out.println(sb);
-                    System.exit(0);
+                    num1 = i;
+                    num2 = j;
+                    break;
                 }
             }
         }
 
+        for (int i = 0; i < N; i++) {
+            if (i == num1 || i == num2) {
+                continue;
+            } else {
+                sb.append(arr[i]).append("\n");
+            }
+        }
+        System.out.println(sb);
     }
-
 }
