@@ -45,9 +45,7 @@ public class Main {
         }
         int before = 0;
         for (int i = 0; i < n; i++) {
-            if (visited[i]) {
-                continue;
-            } else if (before != arr2[i]) {
+            if (!visited[i] && before != arr2[i]) {
                 visited[i] = true;
                 arr[depth] = arr2[i];
                 before = arr2[i];
