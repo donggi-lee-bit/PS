@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
 
 public class Main {
 
@@ -19,18 +18,21 @@ public class Main {
     }
 
     public int solution(int[] arr) {
-        Stack<Integer> stack = new Stack<>();
-        for (int number : arr) {
-            if (number == 0) {
-                stack.pop();
+        int top = 0;
+        int[] arr2 = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                arr2[top] = 0;
+                top -= 1;
             } else {
-                stack.push(number);
+                top += 1;
+                arr2[top] = arr[i];
             }
         }
 
         int sum = 0;
-        for (Integer integer : stack) {
-            sum += integer;
+        for (int i : arr2) {
+            sum += i;
         }
         return sum;
     }
