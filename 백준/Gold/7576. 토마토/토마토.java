@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class Main {
 
-    int[] dx = new int[]{-1, 1, 0, 0};
+    int[] dx = new int[]{1, -1, 0, 0};
     int[] dy = new int[]{0, 0, 1, -1};
     int max = -1;
 
@@ -14,8 +14,8 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String[] split = br.readLine().split(" ");
-        int m = Integer.parseInt(split[0]);
-        int n = Integer.parseInt(split[1]);
+        int m = Integer.parseInt(split[0]); // ㄱ가로 칸의 수
+        int n = Integer.parseInt(split[1]); // 세로 칸의 수
 
         String[][] map = new String[n][m];
         for (int i = 0; i < n; i++) {
@@ -23,17 +23,13 @@ public class Main {
         }
 
         Main s = new Main();
-        System.out.println(s.solution(m, n, map));
+        System.out.println(s.solution(n, m, map));
     }
 
-
-    public int solution(int m, int n, String[][] map) {
-
-        // n 세로, m 가로
+    private int solution(int n, int m, String[][] map) {
         Queue<int[]> q = new LinkedList<>();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                // 찾아라 토마토 좌표
                 if (map[i][j].equals("1")) {
                     q.offer(new int[]{i, j});
                 }
@@ -59,9 +55,13 @@ public class Main {
         }
 
         if (checkZero(n, m, map) && max == -1) {
-            return 0;
+                return 0;
         }
-        return checkZero(n, m, map) ? max - 1 : -1;
+
+        if (!checkZero(n, m, map)) {
+            return -1;
+        }
+        return max - 1;
     }
 
     private boolean checkZero(int n, int m, String[][] map) {
@@ -74,4 +74,5 @@ public class Main {
         }
         return true;
     }
+
 }
