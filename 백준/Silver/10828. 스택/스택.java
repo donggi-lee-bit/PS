@@ -8,44 +8,54 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
-        int n = Integer.parseInt(br.readLine());
-        List<Integer> stack = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            String[] commands = br.readLine().split(" ");
+        int N = Integer.parseInt(br.readLine());
+        String[] commands = new String[N];
+        for (int i = 0; i < N; i++) {
+            commands[i] = br.readLine();
+        }
 
-            if (commands.length != 1) {
-                int number = Integer.parseInt(commands[1]);
-                stack.add(number);
+        Main s = new Main();
+        System.out.println(s.solution(N, commands));
+    }
+
+    public String solution(int n, String[] commands) {
+        StringBuilder answer = new StringBuilder();
+        List<Integer> values = new ArrayList<>();
+        for (String command : commands) {
+            String[] s = command.split(" ");
+            if (s.length > 1) {
+                // 숫자가 존재하는 것 push
+                values.add(Integer.parseInt(s[1]));
             } else {
+                // pop, size, empty, top
+                if (s[0].equals("pop")) {
+                    // 가장 앞 value 지우고 출력
+                    if (values.isEmpty()) {
+                        answer.append(-1).append("\n");
+                    } else {
+                        answer.append(values.remove(values.size() - 1)).append("\n");
+                    }
 
-                if (commands[0].equals("top")) {
-
-                    if (stack.isEmpty()) {
-                        sb.append(-1 + "\n");
-                    } else sb.append(stack.get(stack.size() - 1) + "\n");
-                }
-
-                if (commands[0].equals("size")) {
-                    sb.append(stack.size() + "\n");
-                }
-
-                if (commands[0].equals("empty")) {
-
-                    if (stack.isEmpty()) {
-                        sb.append(1 + "\n");
-                    } else sb.append(0 + "\n");
-                }
-
-                if (commands[0].equals("pop")) {
-
-                    if (stack.isEmpty()) {
-                        sb.append(-1 + "\n");
-                    } else sb.append(stack.remove(stack.size() - 1) + "\n");
+                } else if (s[0].equals("size")) {
+                    answer.append(values.size()).append("\n");
+                } else if (s[0].equals("empty")) {
+                    if (values.isEmpty()) {
+                        answer.append(1).append("\n");
+                    } else {
+                        answer.append(0).append("\n");
+                    }
+                } else {
+                    // top 이면
+                    if (values.isEmpty()) {
+                        answer.append(-1).append("\n");
+                    } else {
+                        answer.append(values.get(values.size() - 1)).append("\n");
+                    }
                 }
             }
         }
-        System.out.println(sb);
+        return answer.toString();
     }
+
 }
