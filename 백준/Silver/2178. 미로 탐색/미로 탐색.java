@@ -6,63 +6,60 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int N;
-    static int M;
-    static boolean[][] visited;
-    static int[] dx = {1, -1, 0, 0};
-    static int[] dy = {0, 0, 1, -1};
-    static int[][] board;
+
+    int[][] map;
+    int[] dx = new int[]{0, 0, -1, 1};
+    int[] dy = new int[]{-1, 1, 0, 0};
+    int[][] dist;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        visited = new boolean[N][M];
-        board = new int[N][M];
-
+        String[] input = new String[N];
         for (int i = 0; i < N; i++) {
-            String[] strings = br.readLine().split("");
-            for (int j = 0; j < M; j++) {
-                board[i][j] = Integer.parseInt(strings[j]);
-            }
+            input[i] = br.readLine();
         }
 
-        visited[0][0] = true;
-        bfs(0, 0);
-        System.out.println(board[N - 1][M - 1]);
-
+        Main s = new Main();
+        System.out.println(s.solution(N, M, input));
     }
 
-    private static void bfs(int x, int y) {
-        Queue<Node> q = new LinkedList<>();
-        q.add(new Node(x, y));
-
+    public int solution(int n, int m, String[] input) {
+        map = new int[n][m];
+        dist = new int[n][m];
+        for (int i = 0; i < input.length; i++) {
+            String[] split = input[i].split("");
+            for (int j = 0; j < split.length; j++) {
+                map[i][j] = Integer.parseInt(split[j]);
+                dist[i][j] = -1;
+            }
+        }
+        dist[0][0] = 0; // 0, 0 은 0으로 초기화
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{0, 0});
         while (!q.isEmpty()) {
-            Node poll = q.poll();
+            int[] poll = q.poll();
             for (int i = 0; i < 4; i++) {
-                int nx = poll.x + dx[i];
-                int ny = poll.y + dy[i];
+                int nx = dx[i] + poll[0];
+                int ny = dy[i] + poll[1];
 
-                if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
-                if (visited[nx][ny] || board[nx][ny] == 0) continue;
-                q.add(new Node(nx, ny));
-                board[nx][ny] = board[poll.x][poll.y] + 1;
-                visited[nx][ny] = true;
+                if (nx < 0 || ny < 0 || nx >= n || ny >= m) {
+                    continue;
+                }
+
+                if (map[nx][ny] == 0 || dist[nx][ny] != -1) {
+                    continue;
+                }
+
+                q.offer(new int[]{nx, ny});
+                dist[nx][ny] = dist[poll[0]][poll[1]] + 1;
             }
         }
-    }
 
-}
-
-class Node {
-    int x;
-    int y;
-
-    public Node(int x, int y) {
-        this.x = x;
-        this.y = y;
+        return dist[n - 1][m - 1] + 1;
     }
 }
