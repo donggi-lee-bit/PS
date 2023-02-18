@@ -6,51 +6,51 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static int m;
-    static int n;
-    static StringBuilder sb = new StringBuilder();
+    static int N;
+    static int M;
     static int[] arr;
-    static int[] arr2;
     static boolean[] visited;
+    static StringBuilder sb = new StringBuilder();
+    static int[] numbers;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-        arr = new int[m];
-        arr2 = new int[n];
-        visited = new boolean[n];
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        visited = new boolean[N];
+        arr = new int[M];
+        numbers = new int[N];
 
         st = new StringTokenizer(br.readLine(), " ");
-        for (int i = 0; i < n; i++) {
-            arr2[i] = Integer.parseInt(st.nextToken());
+        for (int i = 0; i < N; i++) {
+            numbers[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(arr2);
-        // 2 4 5
-        // m = 1
-        dfs(0,0);
-        System.out.println(sb);
+        Arrays.sort(numbers);
+
+        dfs(0, 0);
+        System.out.println(sb.toString());
     }
 
-    private static void dfs(int at, int depth) {
-        // 탈출 조건
-        if (depth == m) {
-            for (int i : arr) {
-                sb.append(i).append(" ");
+    private static void dfs(int depth, int start) {
+        if (depth == M) {
+            for (int value : arr) {
+                sb.append(value).append(' ');
             }
-            sb.append("\n");
+            sb.append('\n');
             return;
         }
-        // dfs
-        for (int i = at; i < n; i++) {
+
+        for (int i = start; i < N; i++) {
             if (!visited[i]) {
                 visited[i] = true;
-                arr[depth] = arr2[i];
-                dfs(i + 1, depth + 1);
+                arr[depth] = numbers[i];
+                dfs(depth + 1, i + 1);
                 visited[i] = false;
             }
         }
     }
+
 }
