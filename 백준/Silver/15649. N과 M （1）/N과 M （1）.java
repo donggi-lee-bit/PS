@@ -5,35 +5,35 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+    static int N;
+    static int M;
+    static StringBuilder sb = new StringBuilder();
     static boolean[] visited;
     static int[] arr;
-    static int n, m;
-    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        n = Integer.parseInt(st.nextToken()); //4
-        m = Integer.parseInt(st.nextToken()); //3
-
-        visited = new boolean[n];
-        arr = new int[m];
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        visited = new boolean[N];
+        arr = new int[M];
 
         dfs(0);
-        System.out.println(sb);
+        System.out.println(sb.toString());
     }
 
     private static void dfs(int depth) {
-        if (depth == m) {
-            for (int i : arr) {
-                sb.append(i).append(" ");
+        if (depth == M) {
+            for (int value : arr) {
+                sb.append(value).append(' ');
             }
-            sb.append("\n");
+            sb.append('\n');
             return;
         }
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < N; i++) {
             if (!visited[i]) {
                 visited[i] = true;
                 arr[depth] = i + 1;
@@ -42,4 +42,6 @@ public class Main {
             }
         }
     }
+
+
 }
