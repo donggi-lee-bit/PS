@@ -10,58 +10,60 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
 
-        int n = Integer.parseInt(br.readLine());
+        int[] numbers = new int[N];
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int[] numbers = new int[n];
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < N; i++) {
             numbers[i] = Integer.parseInt(st.nextToken());
         }
 
         int[] operators = new int[4];
         st = new StringTokenizer(br.readLine(), " ");
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < operators.length; i++) {
             operators[i] = Integer.parseInt(st.nextToken());
         }
 
         Main s = new Main();
-        System.out.println(s.solution(n, numbers, operators));;
+        System.out.println(s.solution(N, numbers, operators));
     }
 
     public String solution(int n, int[] numbers, int[] operators) {
+        dfs(numbers[0], 1, n, numbers, operators);
+
+        // 결과 출력
         StringBuilder sb = new StringBuilder();
-        // int 범위 내의 수
-        // 연산자는 덧셈, 뺄셈, 곱셈, 나눗셈 순서대로, 개수
-        // 음수를 양수로 나눌 때는. 양수로 바꾼뒤 몫을 취하고 그 몫을 음수로 바꾼다
-        dfs(numbers[0], 1, numbers, operators, n);
-        sb.append(max).append("\n");
+        sb.append(max).append('\n');
         sb.append(min);
         return sb.toString();
     }
 
-    private void dfs(int num, int index, int[] numbers, int[] operators, int n) {
-        if (index == n) {
-            max = Math.max(max, num);
-            min = Math.min(min, num);
+    private void dfs(int number, int depth, int n, int[] numbers, int[] operators) {
+        if (depth == n) {
+            // 갱신
+            max = Math.max(max, number);
+            min = Math.min(min, number);
             return;
         }
 
         for (int i = 0; i < 4; i++) {
             if (operators[i] > 0) {
                 operators[i]--;
-
                 if (i == 0) {
-                    dfs(num + numbers[index], index + 1, numbers, operators, n);
+                    // 덧셈
+                    dfs(number + numbers[depth], depth + 1, n, numbers, operators);
                 } else if (i == 1) {
-                    dfs(num - numbers[index], index + 1, numbers, operators, n);
+                    // 뺄셈
+                    dfs(number - numbers[depth], depth + 1, n, numbers, operators);
                 } else if (i == 2) {
-                    dfs(num * numbers[index], index + 1, numbers, operators, n);
+                    // 곱셈
+                    dfs(number * numbers[depth], depth + 1, n, numbers, operators);
                 } else {
-                    dfs(num / numbers[index], index + 1, numbers, operators, n);
+                    // 나눗셈
+                    dfs(number / numbers[depth], depth + 1, n, numbers, operators);
                 }
                 operators[i]++;
             }
         }
     }
-
 }
