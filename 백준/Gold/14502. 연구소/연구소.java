@@ -9,36 +9,29 @@ public class Main {
 
     int[] dx = new int[]{0, 0, -1, 1};
     int[] dy = new int[]{-1, 1, 0, 0};
-    int globalN;
-    int globalM;
+    int max = Integer.MIN_VALUE;
+    boolean[][] visited;
     int[][] map;
-    int max = 0;
-
 
     public static void main(String[] args) throws IOException {
-        // 입력
-        // 빈 공간 좌표 모아서 3개씩 뽑아내기 dfs
-        // 바이러스 퍼뜨리기 bfs
-        // 안전 영역 확인
-        // 최대값 갱신
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-
-        String[] inputs = new String[n];
-        for (int i = 0; i < inputs.length; i++) {
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        String[] inputs = new String[N];
+        for (int i = 0; i < N; i++) {
             inputs[i] = br.readLine();
         }
 
         Main s = new Main();
-        System.out.println(s.solution(n, m, inputs));
+        System.out.println(s.solution(N, M, inputs));
+
     }
 
     private int solution(int n, int m, String[] inputs) {
-        globalN = n;
-        globalM = m;
+        // 3개의 벽 세우기 백트래킹
+        // 바이러스 퍼뜨리기 bfs 로 0 -> 2
+        // 바이러스를 퍼뜨린 후 남은 0의 개수 갱신 max
         map = new int[n][m];
         for (int i = 0; i < n; i++) {
             String[] split = inputs[i].split(" ");
@@ -47,39 +40,38 @@ public class Main {
             }
         }
 
-        dfs(0);
-
+        visited = new boolean[n][m];
+        dfs(0, n, m);
         return max;
     }
 
-    private void dfs(int depth) {
+    private void dfs(int depth, int n, int m) {
         if (depth == 3) {
-            bfs();
+            bfs(n, m);
             return;
         }
 
-        for (int i = 0; i < globalN; i++) {
-            for (int j = 0; j < globalM; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
                 if (map[i][j] == 0) {
                     map[i][j] = 1;
-                    dfs(depth + 1);
+                    dfs(depth + 1, n, m);
                     map[i][j] = 0;
                 }
             }
         }
     }
 
-    private void bfs() {
-        // 바이러스 퍼뜨려보기 위해 카피맵에
-        int[][] copyMap = new int[globalN][globalM];
-        for (int i = 0; i < copyMap.length; i++) {
+    private void bfs(int n, int m) {
+        int[][] copyMap = new int[n][m];
+        for (int i = 0; i < n; i++) {
             copyMap[i] = map[i].clone();
         }
 
         Queue<int[]> q = new LinkedList<>();
-        for (int i = 0; i < globalN; i++) {
-            for (int j = 0; j < globalM; j++) {
-                if (map[i][j] == 2) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (copyMap[i][j] == 2) {
                     q.add(new int[]{i, j});
                 }
             }
@@ -91,7 +83,7 @@ public class Main {
                 int nx = dx[i] + poll[0];
                 int ny = dy[i] + poll[1];
 
-                if (nx >= 0 && ny >= 0 && nx < globalN && ny < globalM) {
+                if (nx >= 0 && ny >= 0 && nx < n && ny < m) {
                     if (copyMap[nx][ny] == 0) {
                         copyMap[nx][ny] = 2;
                         q.add(new int[]{nx, ny});
@@ -100,14 +92,9 @@ public class Main {
             }
         }
 
-        // 안전 영역 확인
-        checkSafetyZone(copyMap);
-    }
-
-    private void checkSafetyZone(int[][] copyMap) {
         int count = 0;
-        for (int i = 0; i < globalN; i++) {
-            for (int j = 0; j < globalM; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
                 if (copyMap[i][j] == 0) {
                     count++;
                 }
