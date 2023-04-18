@@ -6,47 +6,45 @@ import java.util.StringTokenizer;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Main s = new Main();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] split = br.readLine().split(" ");
-        int n = Integer.parseInt(split[0]);
-        int m = Integer.parseInt(split[1]);
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
 
-        int[][] arr = new int[n + 1][n + 1];
-        StringTokenizer st;
+        int[][] map = new int[n + 1][n + 1];
         for (int i = 1; i <= n; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             for (int j = 1; j <= n; j++) {
-                arr[i][j] = Integer.parseInt(st.nextToken()) + arr[i][j - 1];
+                map[i][j] = Integer.parseInt(st.nextToken()) + map[i][j - 1];
             }
         }
 
-        int[][] num = new int[m][4];
+        int[][] targets = new int[m][4];
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             for (int j = 0; j < 4; j++) {
-                num[i][j] = Integer.parseInt(st.nextToken());
+                targets[i][j] = Integer.parseInt(st.nextToken());
             }
         }
 
-        System.out.print(s.solution(arr, num));
+        Main s = new Main();
+        System.out.println(s.solution(map, targets));
     }
 
-    String solution(int[][] arr, int[][] num) {
-        StringBuilder answer = new StringBuilder();
-        for (int[] nums : num) {
-            int x1 = nums[0];
-            int y1 = nums[1];
-            int x2 = nums[2];
-            int y2 = nums[3];
-            int sum = 0;
-            for (int startRow = x1; startRow <= x2; startRow++) {
-                sum += arr[startRow][y2] - arr[startRow][y1 - 1];
+    private String solution(int[][] map, int[][] targets) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < targets.length; i++) {
+            int result = 0;
+            int x1 = targets[i][0];
+            int y1 = targets[i][1];
+            int x2 = targets[i][2];
+            int y2 = targets[i][3];
+            for (int j = x1; j <= x2; j++) {
+                result += map[j][y2] - map[j][y1 - 1];
             }
-            answer.append(sum).append("\n");
+            sb.append(result).append('\n');
         }
-
-        return answer.toString();
+        return sb.toString();
     }
 
 }
