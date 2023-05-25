@@ -2,12 +2,19 @@ import java.util.*;
 class Solution {
     public int solution(int[] queue1, int[] queue2) {
         // 두 배열을 queue 에다가 옮겨담자
-        LinkedList<Integer> q1 = arrToQueue(queue1);
-        LinkedList<Integer> q2 = arrToQueue(queue2);
+        LinkedList<Integer> q1 = new LinkedList<>();
+        LinkedList<Integer> q2 = new LinkedList<>();
 
         // 두 배열의 원소 합 / 2
-        long sum1 = addElement(q1);
-        long sum2 = addElement(q2);
+        long sum1 = 0;
+        long sum2 = 0;
+
+        for (int i = 0; i < queue1.length; i++) {
+            q1.add(queue1[i]);
+            q2.add(queue2[i]);
+            sum1 += queue1[i];
+            sum2 += queue2[i];
+        }
 
         if ((sum1 + sum2) % 2 != 0) {
             return -1;
@@ -40,23 +47,5 @@ class Solution {
         }
 
         return answer;
-    }
-
-    public LinkedList<Integer> arrToQueue(int[] arr) {
-        LinkedList<Integer> queue = new LinkedList<>();
-        for (int i : arr) {
-            queue.add(i);
-        }
-        return queue;
-    }
-
-    public int addElement(Queue<Integer> queue) {
-        int sum = 0;
-
-        for (Integer value : queue) {
-            sum += value;
-        }
-
-        return sum;
     }
 }
