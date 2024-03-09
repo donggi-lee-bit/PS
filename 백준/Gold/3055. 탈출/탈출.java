@@ -57,7 +57,6 @@ public class Main {
                     if (nx >= 0 && nx < R && ny >= 0 && ny < C) {
                         if (map[nx][ny] == 'D') {
                             answer = Math.min(answer, times + 1);
-                            break;
                         } else if (map[nx][ny] == '.') {
                             map[nx][ny] = 'S';
                             queue.offer(new int[]{nx, ny, times + 1});
